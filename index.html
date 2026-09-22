@@ -133,9 +133,33 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
 .facts{display:grid; grid-template-columns:auto 1fr; gap:.4rem 1.5rem; margin:1.75rem 0; font-size:.98rem}
 .facts dt{color:var(--ink-2)} .facts dd{margin:0}
 
+.photo-sleeve{position:relative; width:min(320px,78%); margin:2.75rem 0 0}
+.photo{position:relative; z-index:2; aspect-ratio:1; border-radius:8px; overflow:hidden; background:var(--cobalt); box-shadow:0 18px 40px -18px rgba(0,0,0,.55)}
+.photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.initials{position:absolute; inset:0; display:grid; place-items:center; font:800 clamp(4rem,9vw,6rem)/1 var(--display); font-variation-settings:"wdth" 78; color:#fff; letter-spacing:-.04em}
+.photo-disc{position:absolute; z-index:1; width:94%; aspect-ratio:1; top:3%; left:3%; border-radius:50%;
+  background:radial-gradient(circle,#2b45e0 0 17%,#101015 17.5% 19%,transparent 19.5%),repeating-radial-gradient(circle,#15151c 0 2px,#22222b 2px 4px);
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.14); translate:34% 0; transition:translate .6s cubic-bezier(.3,.7,.2,1), rotate .6s cubic-bezier(.3,.7,.2,1)}
+.photo-sleeve:hover .photo-disc{translate:46% 0; rotate:40deg}
+.photo-sleeve figcaption{font-size:.9rem; color:var(--ink-2); margin-top:.9rem}
+@media (max-width:820px){ .photo-sleeve{width:min(260px,62%)} }
+@media (prefers-reduced-motion:reduce){ .photo-disc{transition:none} }
+.hello-grid{display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:clamp(2rem,5vw,4rem); align-items:center}
+@media (max-width:860px){ .hello-grid{grid-template-columns:1fr} }
+.status{background:var(--paper); border-radius:22px; padding:clamp(1.25rem,3vw,2rem)}
+.status-top{display:flex; align-items:center; gap:.6rem; font-weight:600; margin:0 0 1.1rem}
+.dot{width:.65rem; height:.65rem; border-radius:50%; background:#2fbf71; box-shadow:0 0 0 0 rgba(47,191,113,.5); animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(47,191,113,0)}100%{box-shadow:0 0 0 0 rgba(47,191,113,0)}}
+@media (prefers-reduced-motion:reduce){ .dot{animation:none} }
+.status dl{display:grid; grid-template-columns:auto 1fr; gap:.45rem 1.25rem; margin:0 0 1.25rem; font-size:.98rem}
+.status dt{color:var(--ink-2)} .status dd{margin:0}
+.status-links{list-style:none; margin:0; padding:0; border-top:1.5px solid var(--wall-2)}
+.status-links a{display:flex; justify-content:space-between; gap:1rem; padding:.85rem 0; border-bottom:1.5px solid var(--wall-2); text-decoration:none; font-weight:600}
+.status-links a span{font-weight:400; color:var(--ink-2)}
+.status-links a:hover span{color:var(--cobalt)}
 /* footer */
 .hello{border-top:1.5px solid var(--ink); padding:clamp(3rem,8vw,5.5rem) 0 2rem}
-.hello h2{font:800 clamp(2.6rem,8vw,6.5rem)/.9 var(--display); font-variation-settings:"wdth" 78; letter-spacing:-.035em; margin:0 0 1.5rem; max-width:12ch}
+.hello h2{font:800 clamp(2.6rem,6.5vw,5.5rem)/.9 var(--display); font-variation-settings:"wdth" 78; letter-spacing:-.035em; margin:0 0 1.5rem; max-width:12ch}
 .hello .row{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center}
 .copied{font-size:.9rem; color:var(--ink-2); min-width:5rem}
 .foot{display:flex; justify-content:space-between; margin-top:4rem; font-size:.85rem; color:var(--ink-2); flex-wrap:wrap; gap:.5rem}
@@ -147,7 +171,7 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
 <div class="wrap">
   <header class="top">
     <a class="mark" href="#">danny argudo</a>
-    <nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="mailto:dannyargudo12@gmail.com">Email</a></nav>
+    <nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="mailto:danny06@stanford.edu">Email</a></nav>
   </header>
 </div>
 
@@ -199,7 +223,17 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
   </section>
 
   <section id="about" class="wrap about" aria-labelledby="about-title">
-    <h2 id="about-title">Liner notes</h2>
+    <div class="about-left">
+      <h2 id="about-title">Liner notes</h2>
+      <figure class="photo-sleeve">
+        <div class="photo-disc" aria-hidden="true"></div>
+        <div class="photo">
+          <span class="initials" aria-hidden="true">DA</span>
+          <img src="danny.jpg" alt="Danny Argudo" onerror="this.remove()">
+        </div>
+        <figcaption>Danny Argudo, Stanford CS ’26</figcaption>
+      </figure>
+    </div>
     <div class="body">
       <p>I just finished a B.S. in Computer Science at Stanford on the AI track, with a minor in math. Most recently I was a software engineering intern on Chimeboard’s AI/Data Platform team, where I built evaluation infrastructure for LLM pipelines.</p>
       <p>The work I like best sits between models and products: making an AI feature measurable, then making the backend around it boring in the good way. Outside of that I spend a lot of time with music, which is how a CS 229 project turned into a model that writes MIDI.</p>
@@ -207,22 +241,33 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
         <dt>Based in</dt><dd>New York metro area</dd>
         <dt>Studied</dt><dd>Stanford CS, AI track, math minor, class of 2026</dd>
         <dt>Most recently</dt><dd>SWE intern, Chimeboard AI/Data Platform</dd>
-        <dt>Looking for</dt><dd>Software engineering and AI/ML roles</dd>
       </dl>
-      <div class="links">
-        <a class="btn solid" href="resume.pdf">Résumé</a>
-        <a class="btn" href="https://linkedin.com/in/danny-argudo">LinkedIn</a>
-        <a class="btn" href="https://github.com/DannyAr1225">GitHub</a>
-      </div>
     </div>
   </section>
 
   <section class="wrap hello" aria-labelledby="hello-title">
+    <div class="hello-grid">
+    <div>
     <h2 id="hello-title">Got a project? Let’s talk.</h2>
     <div class="row">
-      <a class="btn solid" href="mailto:dannyargudo12@gmail.com">Email dannyargudo12@gmail.com</a>
+      <a class="btn solid" href="mailto:danny06@stanford.edu">Email danny06@stanford.edu</a>
       <button class="btn" id="copyBtn">Copy email</button>
       <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+    </div>
+    <aside class="status" aria-label="Availability">
+      <p class="status-top"><span class="dot" aria-hidden="true"></span>Open to new roles</p>
+      <dl>
+        <dt>Looking for</dt><dd>Software engineering and AI/ML roles</dd>
+        <dt>Available</dt><dd>Now</dd>
+        <dt>Where</dt><dd>New York metro area</dd>
+      </dl>
+      <ul class="status-links">
+        <li><a href="resume.pdf">Résumé <span>PDF ↗</span></a></li>
+        <li><a href="https://linkedin.com/in/danny-argudo" target="_blank" rel="noopener">LinkedIn <span>in/danny-argudo ↗</span></a></li>
+        <li><a href="https://github.com/DannyAr1225" target="_blank" rel="noopener">GitHub <span>DannyAr1225 ↗</span></a></li>
+      </ul>
+    </aside>
     </div>
     <div class="foot"><span>© 2026 Danny Argudo</span><span>Covers are generated from each project’s data</span></div>
   </section>
@@ -499,7 +544,7 @@ $("#prev").onclick=()=>select(current-1);
 $("#next").onclick=()=>select(current+1);
 crate.addEventListener("keydown",e=>{ if(e.key==="ArrowRight"||e.key==="ArrowLeft"){ e.preventDefault(); const j=current+(e.key==="ArrowRight"?1:-1); select(j); crate.children[current].focus(); }});
 
-$("#copyBtn").onclick=async()=>{ try{ await navigator.clipboard.writeText("dannyargudo12@gmail.com"); $("#copied").textContent="Copied"; }catch{ $("#copied").textContent="dannyargudo12@gmail.com"; } };
+$("#copyBtn").onclick=async()=>{ try{ await navigator.clipboard.writeText("danny06@stanford.edu"); $("#copied").textContent="Copied"; }catch{ $("#copied").textContent="danny06@stanford.edu"; } };
 
 select(0);
 </script>
