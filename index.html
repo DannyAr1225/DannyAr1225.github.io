@@ -62,8 +62,9 @@ nav a:hover{text-decoration:underline; text-underline-offset:4px}
 .spinning .platter{animation:spin 1.8s linear infinite}
 @keyframes spin{to{rotate:360deg}}
 .arm{transform-origin:86% 14%; transform-box:view-box; transition:rotate .9s cubic-bezier(.5,0,.2,1); rotate:-22deg}
-.spinning .arm{rotate:0deg}
-@media (prefers-reduced-motion:reduce){ .spinning .platter{animation:none} .arm{transition:none} }
+.spinning .arm{rotate:0deg; animation:drop .9s cubic-bezier(.5,0,.2,1)}
+@keyframes drop{0%{rotate:-22deg}100%{rotate:0deg}}
+@media (prefers-reduced-motion:reduce){ .spinning .platter{animation:none} .arm,.spinning .arm{transition:none; animation:none} }
 .tt-controls{display:flex; gap:.5rem; margin-top:1rem; align-items:center}
 .btn{font:600 .92rem/1 var(--body); border:1.5px solid var(--ink); background:transparent; color:var(--ink); padding:.7rem 1rem; border-radius:999px; cursor:pointer; text-decoration:none; display:inline-flex; gap:.4rem; align-items:center}
 .btn:hover{background:var(--ink); color:var(--paper)}
@@ -173,8 +174,8 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
               <circle cx="212" cy="210" r="176" fill="#101015"/>
               <g id="grooves"></g>
               <circle id="labelDisc" cx="212" cy="210" r="62" fill="#2b45e0"/>
-              <text id="labelText" x="212" y="206" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="15" fill="#fff"></text>
-              <text id="labelSide" x="212" y="226" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#ffffffb0"></text>
+              <text id="labelText" x="212" y="198" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="15" fill="#fff"></text>
+              <text id="labelSide" x="212" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#ffffffb0"></text>
               <circle cx="212" cy="210" r="4" fill="#d8d8e0"/>
             </g>
             <g class="arm">
@@ -187,7 +188,6 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
         <div class="tt-controls">
           <button class="btn" id="prev" aria-label="Previous project">←</button>
           <button class="btn" id="next" aria-label="Next project">→</button>
-          <button class="btn" id="playBtn" aria-pressed="true">Pause</button>
           <span class="tt-count" id="count" aria-live="polite"></span>
         </div>
       </div>
@@ -429,7 +429,7 @@ gr+=`<path d="M212 34 A176 176 0 0 1 388 210" stroke="#ffffff14" stroke-width="3
 $("#grooves").innerHTML=gr;
 
 /* hero disc */
-$("#heroDisc").innerHTML = (()=>{ let s=`<circle cx="200" cy="200" r="196" fill="var(--ink)"/>`; for(let rr=60; rr<194; rr+=5) s+=`<circle cx="200" cy="200" r="${rr}" fill="none" stroke="var(--wall)" stroke-opacity=".08"/>`; return s+`<circle cx="200" cy="200" r="54" fill="var(--cobalt)"/><circle cx="200" cy="200" r="5" fill="var(--wall)"/>`; })();
+$("#heroDisc").innerHTML = (()=>{ let s=`<circle cx="200" cy="200" r="196" fill="#101015" stroke="#ffffff" stroke-opacity=".12" stroke-width="1.5"/>`; for(let rr=60; rr<194; rr+=5) s+=`<circle cx="200" cy="200" r="${rr}" fill="none" stroke="#ffffff" stroke-opacity=".07"/>`; return s+`<path d="M200 12 A188 188 0 0 1 388 200" stroke="#ffffff" stroke-opacity=".06" stroke-width="34" fill="none"/><circle cx="200" cy="200" r="54" fill="#2b45e0"/><circle cx="200" cy="200" r="5" fill="#dcdde3"/>`; })();
 
 function highlight(code){
   const esc=code.replace(/&/g,"&amp;").replace(/</g,"&lt;");
@@ -487,18 +487,21 @@ function select(i, fromUser){
   $("#labelSide").textContent=`SIDE ${p.side}`;
   $("#count").textContent=`${current+1} of ${PROJECTS.length}`;
   renderNotes(p);
+  needleDrop();
   if(fromUser && innerWidth<880) $("#deck").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
 }
-function setPlaying(v){ playing=v; $("#tt").classList.toggle("spinning",v); $("#playBtn").textContent=v?"Pause":"Play"; $("#playBtn").setAttribute("aria-pressed",v); }
+function needleDrop(){
+  const tt=$("#tt"); if(!playing){ tt.classList.remove("spinning"); return; }
+  tt.classList.remove("spinning"); void tt.offsetWidth; tt.classList.add("spinning");
+}
 
 $("#prev").onclick=()=>select(current-1);
 $("#next").onclick=()=>select(current+1);
-$("#playBtn").onclick=()=>setPlaying(!playing);
 crate.addEventListener("keydown",e=>{ if(e.key==="ArrowRight"||e.key==="ArrowLeft"){ e.preventDefault(); const j=current+(e.key==="ArrowRight"?1:-1); select(j); crate.children[current].focus(); }});
 
 $("#copyBtn").onclick=async()=>{ try{ await navigator.clipboard.writeText("dannyargudo12@gmail.com"); $("#copied").textContent="Copied"; }catch{ $("#copied").textContent="dannyargudo12@gmail.com"; } };
 
-select(0); setPlaying(playing);
+select(0);
 </script>
 </body>
 </html>
