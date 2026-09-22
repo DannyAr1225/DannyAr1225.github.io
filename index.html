@@ -111,6 +111,16 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
 .sleeve .s{display:block; font-size:.82rem; color:var(--ink-2)}
 @media (prefers-reduced-motion:reduce){ .sleeve .cover{transition:none} }
 
+.video{position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000; margin:0 0 .5rem}
+.video iframe,.video video{position:absolute; inset:0; width:100%; height:100%; border:0; background:#000}
+.clips{display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin:0 0 1.25rem}
+.clips figure{margin:0}
+.clips video{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; background:#000; cursor:pointer}
+.clips figcaption{font-size:.8rem; color:var(--ink-2); margin-top:.35rem; line-height:1.35}
+@media (max-width:560px){ .clips{grid-template-columns:1fr} }
+.video-cap{font-size:.82rem; color:var(--ink-2); margin:0 0 1.25rem}
+.video-cap a{color:var(--cobalt); font-weight:600; text-decoration:none; white-space:nowrap}
+.video-cap a:hover{text-decoration:underline}
 .gallery{display:grid; gap:.75rem; margin:0 0 1.25rem}
 .gallery.g2{grid-template-columns:1fr 1fr}
 @media (max-width:560px){ .gallery.g2{grid-template-columns:1fr} }
@@ -126,13 +136,14 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
 .why dd{margin:.2rem 0 0; color:var(--ink-2); max-width:60ch}
 .sec{padding-left:1.1rem; margin:0}
 /* about */
-.about{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:clamp(2rem,6vw,5rem); padding:clamp(4rem,9vw,7rem) 0}
+.about{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:clamp(2rem,6vw,5rem); padding:clamp(4rem,9vw,7rem) 0; align-items:center}
 @media (max-width:820px){ .about{grid-template-columns:1fr} }
 .about h2{font:750 clamp(2.4rem,6vw,4.4rem)/.92 var(--display); font-variation-settings:"wdth" 80; letter-spacing:-.03em; margin:0}
 .about .body p{margin:0 0 1rem; max-width:58ch; font-size:1.1rem}
 .facts{display:grid; grid-template-columns:auto 1fr; gap:.4rem 1.5rem; margin:1.75rem 0; font-size:.98rem}
 .facts dt{color:var(--ink-2)} .facts dd{margin:0}
 
+.about-left{display:flex; flex-direction:column; align-items:center; text-align:center}
 .photo-sleeve{position:relative; width:min(320px,78%); margin:2.75rem 0 0}
 .photo{position:relative; z-index:2; aspect-ratio:1; border-radius:8px; overflow:hidden; background:var(--cobalt); box-shadow:0 18px 40px -18px rgba(0,0,0,.55)}
 .photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
@@ -224,7 +235,7 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
 
   <section id="about" class="wrap about" aria-labelledby="about-title">
     <div class="about-left">
-      <h2 id="about-title">Liner notes</h2>
+      <h2 id="about-title">About me</h2>
       <figure class="photo-sleeve">
         <div class="photo-disc" aria-hidden="true"></div>
         <div class="photo">
@@ -238,8 +249,8 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
       <p>I just finished a B.S. in Computer Science at Stanford on the AI track, with a minor in math. Most recently I was a software engineering intern on Chimeboard’s AI/Data Platform team, where I built evaluation infrastructure for LLM pipelines.</p>
       <p>The work I like best sits between models and products: making an AI feature measurable, then making the backend around it boring in the good way. Outside of that I spend a lot of time with music, which is how a CS 229 project turned into a model that writes MIDI.</p>
       <dl class="facts">
-        <dt>Based in</dt><dd>New York metro area</dd>
-        <dt>Studied</dt><dd>Stanford CS, AI track, math minor, class of 2026</dd>
+        <dt>Based in</dt><dd>New York Metro Area</dd>
+        <dt>Studied</dt><dd>Stanford CS, AI Track, Math Minor, Class of 2026</dd>
         <dt>Most recently</dt><dd>SWE intern, Chimeboard AI/Data Platform</dd>
       </dl>
     </div>
@@ -260,7 +271,8 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
       <dl>
         <dt>Looking for</dt><dd>Software engineering and AI/ML roles</dd>
         <dt>Available</dt><dd>Now</dd>
-        <dt>Where</dt><dd>New York metro area</dd>
+        <dt>Where</dt><dd>New York Metro Area or SF Bay Area</dd>
+        <dt>Setup</dt><dd>In-person or hybrid</dd>
       </dl>
       <ul class="status-links">
         <li><a href="resume.pdf">Résumé <span>PDF ↗</span></a></li>
@@ -312,6 +324,7 @@ const PROJECTS = [
     "Recorded each address with its network, source page, nearby context, and a screenshot"
   ],
   stack:["Python","Playwright","OpenAI API","Docker","pytest"],
+  flow:["Load the target list and open an isolated browser context","Collect page signals: text, links, buttons, forms, metadata","Explore toward deposit, wallet, and trading pages, skipping anything irreversible","Extract and validate addresses deterministically with checksum checks","Classify the accumulated evidence with the LLM and record confidence","Checkpoint the result to JSON and move to the next target"],
   modules:[["site_session.py","Playwright and isolated browser contexts"],["page_signals.py","Collects text, links, buttons, forms, and metadata"],["extractor.py","Detects and validates crypto addresses"],["site_explorer.py","Chooses what to explore next"],["classifier.py","LLM verdict over accumulated evidence"],["investigator.py","Runs one full site investigation"],["batch_processor.py","Concurrent runs with checkpointing"]],
   decisions:[
     ["Deterministic address extraction","Wallet formats can be validated in code, so an LLM would only add hallucination risk. Every address traces back to the page it came from."],
@@ -326,7 +339,7 @@ const PROJECTS = [
   id:"starready", side:"A3", title:"StarReady", where:"Stanford CS194W, 4-person team, 10 weeks, Spring 2026",
   colors:["#00c2f0","#0b2a3a","#ffffff"], motif:"star",
   lede:"Technical interviews have LeetCode. Behavioral interviews have StarReady: you practice STAR-style answers with a voice AI interviewer, then get structured feedback on how you did.",
-  gallery:[["@starready","StarReady banner"]],
+  video:{id:"2MnQ06THfng", cap:"Team promo video for StarReady"},
   did:["Designed backend data models, REST API routes, and reusable service-layer components across 3 core modules","Built interview session handling, resume-based context, and AI-generated evaluations","Refined prompt and context handling, testing realistic user flows to make feedback more specific"],
   stack:["FastAPI","Pydantic","React","Vite","Vapi","pytest"],
   flow:["Candidate uploads a résumé and picks a role","Vapi runs a voice interview with role-aware questions","The backend assembles session and résumé context","The model returns structured STAR feedback"],
@@ -387,6 +400,13 @@ const PROJECTS = [
   id:"spectacles", side:"B2", title:"AR Navigation", where:"Stanford Design 284, 5-person team, Spring 2025",
   colors:["#1f6f55","#0d1f19","#c8f0d8"], motif:"grid",
   lede:"Campus visitors told us they wander because they don’t know where to go. We built turn-by-turn walking directions for Snap Spectacles, with a heads-up display for distance, time remaining, and arrival time.",
+  video:{file:"ar-walkthrough.mp4", poster:"ar-walkthrough.jpg", cap:"Full process walkthrough: research, design, and build (8:56)"},
+  clips:[
+    ["ar-clip1","Indoor route preview from the wearer’s point of view"],
+    ["ar-clip2","Following the route through a building lobby"],
+    ["ar-clip3","Walking a path outdoors with the HUD active"],
+    ["ar-clip4","Waypoint anchored to the floor ahead"]
+  ],
   gallery:[["@hud","Heads-up display: distance, time remaining, arrival time"],["@lens","Lens Studio scene: HUD elements, surface detection, and the RouteModel / RouteView / RouteController split"]],
   did:["Built route parsing into turn-by-turn steps","Implemented real-time spatial anchoring for directional cues","Structured routing as model, view, and controller components in TypeScript"],
   stack:["TypeScript","Lens Studio","Snap Spectacles"],
@@ -494,7 +514,7 @@ function renderNotes(p){
   const tabs=[];
   if(p.code) tabs.push(["code","Code"]);
   if(p.modules) tabs.push(["arch","Architecture"]);
-  tabs.push(["flow","How it works"]);
+  if(p.flow) tabs.push(["flow","How it works"]);
   if(p.decisions) tabs.push(["why","Design choices"]);
   if(p.security) tabs.push(["sec","Security"]);
   n.innerHTML=`
@@ -502,6 +522,10 @@ function renderNotes(p){
     <h3>${p.title}</h3>
     <p class="where">${p.where}</p>
     <p class="lede">${p.lede}</p>
+    ${p.video?`<div class="video">${p.video.file
+        ? `<video controls preload="none" playsinline poster="${p.video.poster||""}"><source src="${p.video.file}" type="video/mp4">Your browser can’t play this video. <a href="${p.video.file}">Download it instead.</a></video>`
+        : `<iframe src="https://www.youtube.com/embed/${p.video.id}?rel=0" title="${p.title} video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`}</div><p class="video-cap">${p.video.cap||""}${p.video.id?` <a href="https://youtu.be/${p.video.id}" target="_blank" rel="noopener">Watch on YouTube ↗</a>`:""}</p>`:""}
+    ${p.clips?`<div class="clips">${p.clips.map(([f,cap])=>`<figure><video muted loop playsinline preload="none" poster="${f}.jpg" aria-label="${cap}"><source src="${f}.mp4" type="video/mp4"></video><figcaption>${cap}</figcaption></figure>`).join("")}</div>`:""}
     ${p.gallery?`<div class="gallery g${p.gallery.length}">${p.gallery.map(([src,cap])=>`<figure><img src="${img(src)}" alt="${cap}" loading="lazy"><figcaption>${cap}</figcaption></figure>`).join("")}</div>`:""}
     ${p.stats?`<h4>Results</h4><div class="stats">${p.stats.map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("")}</div>`:""}
     <h4>What I did</h4><ul>${p.did.map(d=>`<li>${d}</li>`).join("")}</ul>
@@ -517,6 +541,12 @@ function renderNotes(p){
     why:()=>`<dl class="why">${p.decisions.map(([t,d])=>`<dt>${t}</dt><dd>${d}</dd>`).join("")}</dl>`,
     sec:()=>`<ul class="sec">${p.security.map(x=>`<li>${x}</li>`).join("")}</ul>`
   };
+  if(!tabs.length) tabs.push(["flow","How it works"]);
+  n.querySelectorAll(".clips video").forEach(v=>{
+    const play=()=>{ v.play().catch(()=>{}); }, stop=()=>{ v.pause(); v.currentTime=0; };
+    v.addEventListener("mouseenter",play); v.addEventListener("mouseleave",stop);
+    v.addEventListener("click",()=>{ v.paused?play():stop(); });
+  });
   const showTab=k=>{ n.querySelectorAll('[role="tab"]').forEach(t=>t.setAttribute("aria-selected", t.dataset.k===k)); $("#panel").innerHTML=views[k](); };
   n.querySelectorAll('[role="tab"]').forEach(t=>t.addEventListener("click",()=>showTab(t.dataset.k)));
   showTab(tabs[0][0]);
