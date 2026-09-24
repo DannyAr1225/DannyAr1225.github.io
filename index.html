@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Danny Argudo — AI systems, backends & the evals that keep them honest</title>
-<meta name="description" content="Danny Argudo is a software engineer building AI systems, backend services, and evaluation harnesses. Pull a record from the crate and take a listen.">
+<title>Danny Argudo — Software Engineer building AI systems, backends, and reliable evaluations</title>
+<meta name="description" content="Danny Argudo is a Stanford CS graduate and software engineer building applied AI systems, backend infrastructure, and evaluation tools.">
 <meta name="theme-color" content="#dcdde3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,7 +112,7 @@ body.playing .hero-disc{opacity:0; transition:opacity .35s ease}
 .notes.segmented .seg.on{opacity:1; translate:0 0; pointer-events:auto}
 .notes.segmented .seg.pre > *{opacity:0}
 .videoblock{display:block}
-.notes.segmented .videoblock .video{height:calc(var(--deckH,60vh) - 108px); width:auto; aspect-ratio:16/9; margin-inline:auto}
+.notes.segmented .videoblock .video{width:min(100%, calc((var(--deckH,60vh) - 108px) * 16 / 9)); height:auto; aspect-ratio:16/9; margin-inline:auto}
 .notes.segmented .clips{grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:.5rem;
   height:calc(var(--deckH,60vh) - 124px)}
 .notes.segmented .clips figure{display:flex; flex-direction:column; min-height:0}
@@ -323,14 +323,14 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
 <main id="main">
   <section class="hero wrap" aria-labelledby="hero-title">
     <h1 id="hero-title">Hi, I’m Danny.</h1>
-    <p>I build AI systems, the backends they run on, and the evaluations that tell you whether they actually work.</p>
+    <p>I’m a software engineer focused on applied AI, backend systems, and the evaluation infrastructure that makes AI products more reliable.</p>
     <svg class="hero-disc" viewBox="0 0 400 400" aria-hidden="true" id="heroDisc"></svg>
   </section>
 
   <section id="work" class="wrap" aria-labelledby="work-title">
     <div class="section-head">
       <h2 id="work-title">Pull a record from the crate</h2>
-      <p>Drag a record onto the player, or click a sleeve. Each side plays itself part by part, or hit “Show all” to read the whole thing at once.</p>
+      <p>Pick a project to see what I built, the problem it solved, the technical decisions behind it, and what I learned along the way.</p>
     </div>
 
     <div class="stage browse" id="stage">
@@ -385,8 +385,8 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
       </figure>
     </div>
     <div class="body">
-      <p>I just finished a B.S. in Computer Science at Stanford on the AI track, with a minor in math. Most recently I was a software engineering intern on Chimeboard’s AI/Data Platform team, where I built evaluation infrastructure for LLM pipelines.</p>
-      <p>The work I like best sits between models and products: making an AI feature measurable, then making the backend around it boring in the good way. Outside of that I spend a lot of time with music, which is how a CS 229 project turned into a model that writes MIDI.</p>
+      <p>I recently graduated from Stanford with a B.S. in Computer Science on the Artificial Intelligence track and a minor in Mathematics. Most recently, I worked on Chimeboard’s AI/Data Platform team, building backend pipelines and evaluation infrastructure for LLM-powered research workflows.</p>
+      <p>I’m most interested in the layer between models and real products: turning ambiguous AI behavior into something measurable, testable, and dependable. I also enjoy building outside that space, from AR navigation to generative music systems.</p>
       <dl class="facts">
         <dt>Based in</dt><dd>New York Metro Area</dd>
         <dt>Studied</dt><dd>Stanford CS, AI Track, Math Minor, Class of 2026</dd>
@@ -398,7 +398,7 @@ pre.code{margin:0; background:#15151f; color:#e6e6f0; border-radius:12px; paddin
   <section class="wrap hello" aria-labelledby="hello-title">
     <div class="hello-grid">
     <div>
-    <h2 id="hello-title">Got a project? Let’s talk.</h2>
+    <h2 id="hello-title">Let’s build something useful.</h2>
     <div class="row">
       <a class="btn solid" href="mailto:danny06@stanford.edu">Email danny06@stanford.edu</a>
       <button class="btn" id="copyBtn">Copy email</button>
@@ -430,43 +430,43 @@ const IMAGES = {"lstm_loss": "data:image/webp;base64,UklGRhAzAABXRUJQVlA4IAQzAAC
 /* ============ PROJECT DATA — edit here ============ */
 const PROJECTS = [
 {
-  id:"discovery", side:"A1", title:"Discovery Ranking", where:"Chimeboard, SWE intern, AI/Data Platform, Jul–Sep 2026",
+  id:"discovery", side:"A1", title:"Reddit Discovery & Evaluation", where:"Chimeboard, Software Engineering Intern, AI/Data Platform, Jul–Sep 2026",
   colors:["#2b45e0","#f5d547","#101a5c"], motif:"distributions",
-  lede:"The ranking and retrieval layer of a content discovery pipeline, plus the offline evaluation system that proved it worked. Retrieved real-world communities are fed into generation, and an LLM judge scores the output against human-reviewed gold labels.",
-  stats:[["+0.222","score gain on the targeted failure case, non-overlapping distributions across every run"],["245","tests by the end of the internship"],["0.947 / 0.000","query scorer self vs cross-fixture score"]],
+  lede:"I built the discovery and evaluation pipeline behind an AI research workflow for Reddit. The system finds real communities, ranks them for relevance, feeds the strongest candidates into generation, and measures the result against human-reviewed examples.",
+  stats:[["+0.222","improvement on the targeted failure case"],["245","automated tests by the end of the internship"],["0.947 / 0.000","query scorer: matching fixture vs unrelated fixture"]],
   did:[
-    "Built the retrieval and ranking layer: candidate generation, dedup, and relevance ranking over live Apify data",
-    "Built the offline eval harness: deterministic metrics plus a Claude Opus judge over gold labels",
-    "Wrote a variance harness that separates real gains from run-to-run noise",
-    "Grew coverage to 245 tests and replaced ad hoc query flows with one reusable abstraction"
+    "Built a retrieval and ranking layer that discovers, deduplicates, and scores live Reddit communities from Apify data",
+    "Built an offline evaluation harness combining deterministic metrics with a Claude judge against human-reviewed gold fixtures",
+    "Added repeated-run evaluation to separate meaningful improvements from normal LLM judge variance",
+    "Expanded the suite to 245 tests and consolidated duplicated query logic into a reusable pipeline"
   ],
   stack:["Python","Anthropic API","Apify","pytest"],
-  flow:["Generate a research plan from a campaign brief","Retrieve, normalize, and dedupe candidate communities","Rank candidates and inject them into generation","Score with deterministic metrics and an LLM judge","Re-run across seeds to separate signal from judge variance"],
+  flow:["Turn a campaign brief into research queries","Discover and normalize real Reddit communities","Rank and inject the strongest candidates into the generated plan","Score the plan with deterministic metrics and an LLM judge","Repeat evaluation runs to distinguish real gains from model variance"],
   decisions:[
-    ["Measure noise before claiming wins","LLM judges vary between runs, so every delta was compared against a variance baseline before it counted."],
-    ["Predict the null result","Candidate injection targets one failure mode. I expected no change where the baseline already avoided it, and the holdout confirmed that."]
+    ["Measure variance before claiming improvement","LLM judges are not perfectly deterministic, so I compared score changes against repeated-run variance before treating them as meaningful."],
+    ["Use holdouts to test generalization","Candidate injection targeted a specific discovery failure. I kept a separate holdout fixture to check whether the improvement generalized beyond the case used during development."]
   ],
   privateNote:"Company code, so the repo is private. Happy to walk through the design in an interview."
 },
 {
   id:"scam", side:"A2", title:"Scam Investigator", where:"TRM Labs engineering challenge, 48 hours, 2026",
   colors:["#d9423a","#1b1b24","#f3c6b8"], motif:"network",
-  lede:"An autonomous agent that visits 160 potentially malicious websites, classifies each as scam or not, and extracts BTC, ETH, and USDT/USDC addresses, including ones that only appear after navigating deeper into a site.",
-  stats:[["160","live, potentially hostile URLs investigated"],["0","addresses generated by the LLM; extraction is fully deterministic"],["48h","build window, with checkpointed batch runs"]],
+  lede:"For a 48-hour engineering challenge, I built an autonomous investigation agent that safely explores potentially malicious websites, classifies scam evidence, and extracts cryptocurrency addresses without relying on the LLM to invent or parse them.",
+  stats:[["160","live websites investigated"],["0","wallet addresses generated by the LLM"],["48h","end-to-end build window"]],
   did:[
-    "Hybrid design: Playwright browses, regex plus checksums extract addresses, the LLM only judges",
-    "Explorer ranks clicks toward deposit and wallet pages, refusing anything irreversible",
-    "Evidence accumulates across pages; each verdict carries confidence and its indicators",
-    "Concurrent runs, checkpointed to JSON, with a screenshot for every address found"
+    "Separated browsing, extraction, and classification: Playwright navigates, deterministic code validates wallet addresses, and the LLM evaluates the accumulated evidence",
+    "Built constrained navigation that prioritizes deposit and wallet pages while avoiding irreversible actions",
+    "Aggregated evidence across visited pages so every verdict includes the signals that supported it",
+    "Added concurrent batch processing, JSON checkpoints, and screenshots for every extracted address"
   ],
   stack:["Python","Playwright","OpenAI API","Docker","pytest"],
-  flow:["Open the site in an isolated browser context","Collect page signals: text, links, forms, metadata","Explore toward deposit and wallet pages","Extract and checksum-validate any addresses","Classify the evidence, then checkpoint to JSON"],
+  flow:["Open each site in an isolated browser session","Collect text, links, forms, and metadata","Navigate toward relevant deposit or wallet flows","Extract and validate cryptocurrency addresses deterministically","Classify the accumulated evidence and save a checkpointed result"],
   modules:[["site_session.py","Playwright and isolated browser contexts"],["page_signals.py","Collects text, links, buttons, forms, and metadata"],["extractor.py","Detects and validates crypto addresses"],["site_explorer.py","Chooses what to explore next"],["classifier.py","LLM verdict over accumulated evidence"],["investigator.py","Runs one full site investigation"],["batch_processor.py","Concurrent runs with checkpointing"]],
   decisions:[
-    ["Deterministic address extraction","Wallet formats can be validated in code, so an LLM would only add hallucination risk. Every address traces back to the page it came from."],
-    ["Constrained navigation, not a free-roaming LLM","A model choosing every click is flexible but slower, costlier, and riskier on hostile sites. Ranked, allow-listed actions kept it predictable."],
-    ["Playwright over requests","Many scam sites render with JavaScript and hide deposit details behind navigation, so the agent needed a real browser."],
-    ["Treat page text as untrusted","The classifier ignores site text that tries to change its role or output format, which blocks prompt injection from malicious pages."]
+    ["Deterministic address extraction","Wallet formats validate in code, so the LLM never invents one."],
+    ["Constrained navigation","Ranked, allow-listed clicks stay predictable on hostile sites."],
+    ["Playwright over requests","Deposit details only appear after JavaScript renders and you navigate."],
+    ["Page text is untrusted","The classifier ignores text trying to change its role, blocking prompt injection."]
   ],
   security:["Isolated browser context per site","Downloads disabled and service workers blocked","The API key is never exposed to pages","Runs in a disposable Docker container"],
   privateNote:"Submitted privately per TRM’s instructions. I can share a walkthrough or code on request."
@@ -474,45 +474,45 @@ const PROJECTS = [
 {
   id:"starready", side:"A3", title:"StarReady", where:"Stanford CS194W, 4-person team, 10 weeks, Spring 2026",
   colors:["#00c2f0","#0b2a3a","#ffffff"], motif:"star",
-  lede:"Technical interviews have LeetCode. Behavioral interviews have StarReady: you practice STAR-style answers with a voice AI interviewer, then get structured feedback on how you did.",
+  lede:"StarReady is an AI-powered behavioral interview practice platform. Candidates complete a realistic voice interview, answer role-specific questions, and receive structured feedback designed around the STAR framework.",
   video:{id:"2MnQ06THfng", cap:"Team promo video for StarReady"},
   did:[
-    "Designed data models, REST routes, and service-layer components across 3 core modules",
-    "Built session handling, résumé-based context, and AI-generated evaluations",
-    "Tuned prompts and context so the feedback got specific instead of generic"
+    "Designed backend data models, REST API routes, and service-layer components for the platform’s core interview workflows",
+    "Built interview session handling, résumé-aware context, and structured AI-generated feedback",
+    "Iterated on prompts and context management to make feedback more specific, relevant, and consistent"
   ],
   stack:["FastAPI","Pydantic","React","Vite","Vapi","pytest"],
-  flow:["Candidate uploads a résumé and picks a role","Vapi runs a voice interview with role-aware questions","The backend assembles session and résumé context","The model returns structured STAR feedback"],
+  flow:["Candidate uploads a résumé and selects a target role","Vapi conducts a voice interview with role-aware questions","The backend combines interview, résumé, and role context","The model generates structured feedback using the STAR framework"],
   links:[["Try it live","https://spr26-team-4.vercel.app"],["Source on GitHub","https://github.com/DannyAr1225/starready-ai-interview-app"]]
 },
 {
   id:"music", side:"A4", title:"Mood-Conditioned Music", where:"Stanford CS 229, 3-person team, Fall 2025",
   colors:["#7fd1b9","#12303a","#f5d547"], motif:"pianoroll",
-  lede:"Can a model write music that sounds happy, sad, calm, or excited on request? We trained an LSTM baseline and a Transformer decoder on 108K labeled MIDI files, and both produce playable MIDI.",
-  stats:[["0.845","validation macro-AUROC, LSTM baseline"],["0.40","LSTM validation loss after 20 epochs"],["55K","Transformer train/val sequences, up from 2K"]],
+  lede:"We built a symbolic music generation system that can condition its output on mood and genre. Using more than 108K labeled MIDI files, we compared LSTM and Transformer approaches and evaluated both predictive performance and the quality of generated music.",
+  stats:[["0.845","validation macro-AUROC for the LSTM baseline"],["108K+","MIDI files in the source dataset"],["55K","Transformer training and validation sequences"]],
   gallery:[["@lstm_loss","LSTM: train and validation loss track closely, so little overfitting"],["@tf_loss","Transformer: loss drops fast, but the lowest-loss checkpoints collapsed onto a few pitches"]],
   did:[
-    "Built the MIDI preprocessing and REMI tokenization pipeline",
-    "Conditioned generation with a mood–genre token and learned mood memory slots",
-    "Caught mode collapse: the lowest-loss checkpoints made near-silent MIDI, so we picked by ear too"
+    "Built the preprocessing pipeline that converts MIDI files into REMI-style token sequences",
+    "Encoded mood and genre information into the sequence representation so generation could respond to conditioning inputs",
+    "Found that some low-loss Transformer checkpoints produced repetitive or nearly silent outputs, so model selection also included qualitative listening checks"
   ],
-  stack:["Python","PyTorch","Transformers","LSTM","REMI tokenization"],
-  flow:["Parse MIDI into REMI event tokens","Prepend a mood–genre conditioning token","Train LSTM and Transformer decoders with teacher forcing","Select checkpoints by validation loss and listening tests"],
-  decisions:[["Don’t trust the lowest loss","The best-scoring Transformer checkpoints repeated a handful of pitches. We picked checkpoints that balanced loss with musical diversity."]],
+  stack:["Python","PyTorch","LSTM","Transformer","REMI tokenization"],
+  flow:["Convert MIDI files into REMI event tokens","Add mood and genre conditioning information","Train LSTM and Transformer sequence models","Compare checkpoints using validation metrics and generated samples"],
+  decisions:[["Metrics were not enough","Some of the lowest-loss checkpoints generated repetitive music. We used both validation metrics and listening tests to judge model quality."]],
   links:[["Project summary","https://github.com/DannyAr1225/mood-conditioned-music-generation"]],
   privateNote:"Full source is withheld under the Stanford honor code; the repo has the write-up and poster."
 },
 {
-  id:"niche", side:"B1", title:"Niche Labeler", where:"Chimeboard take-home, 2026",
+  id:"niche", side:"B1", title:"Creator Niche Labeler", where:"Chimeboard take-home project, 2026",
   colors:["#f2994a","#2a1a0c","#fff1dc"], motif:"clusters",
-  lede:"A reproducible pipeline that clusters creators’ social posts into topics and scores how well each creator fits a target niche.",
+  lede:"A lightweight ML pipeline that groups creators’ posts into recurring topics and scores how consistently each creator matches a target niche.",
   did:[
-    "Cleaned captions and vectorized them with TF-IDF over unigrams and bigrams",
-    "Picked the topic count automatically by silhouette score, 5 to 10 clusters",
-    "Scored creators on niche fit, penalizing off-niche posts, then reviewed labels by hand"
+    "Cleaned and normalized social captions, then represented them with TF-IDF features over unigrams and bigrams",
+    "Selected the number of KMeans clusters automatically using silhouette score across a bounded search range",
+    "Built creator-level niche scores that reward topical consistency and penalize off-niche content, then reviewed the resulting labels manually"
   ],
   stack:["Python","scikit-learn","pandas"],
-  flow:["Clean and normalize captions","TF-IDF vectorize","KMeans with silhouette-selected k","Label topics and score creators"],
+  flow:["Clean and normalize captions","Convert captions into TF-IDF vectors","Choose a KMeans cluster count using silhouette score","Label the discovered topics and score each creator’s niche fit"],
   code:{file:"src/cluster.py", text:
 `def choose_num_topics(vectors, min_topics=5, max_topics=10):
     """
@@ -547,7 +547,7 @@ const PROJECTS = [
 {
   id:"spectacles", side:"B2", title:"AR Navigation", where:"Stanford Design 284, 5-person team, Spring 2025",
   colors:["#1f6f55","#0d1f19","#c8f0d8"], motif:"grid",
-  lede:"Campus visitors told us they wander because they don’t know where to go. We built turn-by-turn walking directions for Snap Spectacles, with a heads-up display for distance, time remaining, and arrival time.",
+  lede:"We prototyped hands-free turn-by-turn navigation for Snap Spectacles. The experience translates a walking route into spatial directions, anchors guidance in the wearer’s environment, and keeps key trip information visible in a lightweight HUD.",
   video:{file:"ar-walkthrough.mp4", poster:"ar-walkthrough.jpg", cap:"Full process walkthrough: research, design, and build (8:56)"},
   clips:[
     ["ar-clip1","Indoor route preview from the wearer’s point of view"],
@@ -557,25 +557,25 @@ const PROJECTS = [
   ],
   gallery:[["@hud","Heads-up display: distance, time remaining, arrival time"],["@lens","Lens Studio scene: HUD elements, surface detection, and the RouteModel / RouteView / RouteController split"]],
   did:[
-    "Parsed routes into turn-by-turn steps",
-    "Anchored directional cues in world space in real time",
-    "Split routing into model, view, and controller components in TypeScript"
+    "Parsed walking routes into discrete turn-by-turn navigation steps",
+    "Anchored directional cues into the wearer’s environment so guidance remained spatially stable while moving",
+    "Structured the navigation logic into model, view, and controller components in TypeScript"
   ],
-  stack:["TypeScript","Lens Studio","Snap Spectacles"],
-  flow:["Fetch and parse a walking route","Break it into turn-by-turn steps","Detect surfaces and anchor cues in world space","Update the HUD as the wearer moves"],
+  stack:["TypeScript","Snap Lens Studio","Snap Spectacles"],
+  flow:["Load and parse a walking route","Convert the route into turn-by-turn instructions","Detect surfaces and place directional cues in 3D space","Update the HUD and route state as the wearer moves"],
   links:[["Source on GitHub","https://github.com/DannyAr1225/spectacles-navigation"]]
 },
 {
   id:"blog", side:"B3", title:"The Loading Spinner", where:"Web Platform Society, co-creator, Summer 2025",
   colors:["#f5d547","#16162a","#2b45e0"], motif:"spinner",
-  lede:"A student tech blog I shipped end to end in Next.js, with an MDX publishing pipeline that made posting fast enough that people actually did it.",
-  stats:[["~30 → <10 min","editor publish time"],["1K+","unique readers in the first month"],["5K+","readership after platform improvements"]],
+  lede:"I co-created a student technology publication and built the publishing system behind it. The site used Next.js and MDX to make writing, reviewing, and shipping technical articles simple enough for student contributors to use regularly.",
+  stats:[["~30 → <10 min","time required to publish a new article"],["1K+","unique readers in the first month"],["5K+","readers reached as the publication grew"]],
   did:[
-    "Built the Next.js site and an MDX publishing pipeline with image optimization",
-    "Wrote 5 technical posts and recruited other contributors"
+    "Built the Next.js site and an MDX publishing workflow with automated image optimization",
+    "Authored five technical articles and recruited additional student contributors"
   ],
   stack:["Next.js","MDX","React"],
-  flow:["Author writes a post in MDX","Pipeline optimizes images and builds pages","Post ships to the live site"]
+  flow:["A contributor writes an article in MDX","The build pipeline processes content and optimizes images","Next.js generates and deploys the finished article"]
 }
 ];
 /* ============ END DATA ============ */
@@ -736,6 +736,7 @@ function renderNotes(p){
     sec:()=>`<ul class="sec">${p.security.map(x=>`<li>${x}</li>`).join("")}</ul>`
   };
   const showTab=k=>{ n.querySelectorAll('[role="tab"]').forEach(t=>t.setAttribute("aria-selected", t.dataset.k===k)); $("#panel").innerHTML=views[k](); };
+  n.__showTab=showTab;
   n.querySelectorAll('[role="tab"]').forEach(t=>t.addEventListener("click",()=>{ if(autoOn) stopHere(); showTab(t.dataset.k); }));
   if(tabs.length) showTab(tabs[0][0]);
 
@@ -759,7 +760,7 @@ const tracks=$("#tracks");
 function segDuration(el){
   const words=(el.innerText||"").trim().split(/\s+/).filter(Boolean).length;
   const media=el.querySelectorAll("video,iframe,img").length;
-  return Math.round(Math.min(17000, Math.max(6500, words/4.6*1000 + media*2500)));
+  return Math.round(Math.min(24000, Math.max(13500, words/4.6*1000 + media*2500 + 7000)));
 }
 function splitOverflowing(){
   const box=notes.querySelector(".segs"); if(!box) return;
@@ -955,7 +956,10 @@ function playSeg(i){
   clearTimeout(segTimer); segs.forEach(e=>e.classList.remove("pre")); showSeg(i);
   const el=segs[segI]; if(!el) return;
   const reveal=animateSegment(el);
-  const dur=Math.max(segDuration(el), reveal+2200); segBar(dur);
+  const tabsEl=el.querySelector(".tabs");
+  if(tabsEl) return playTabs(el, tabsEl, reveal);
+  const dur=Math.max(segDuration(el), reveal+9200); segBar(dur);
+  el.scrollTop=0; autoScrollIn(el, dur);
   segTimer=setTimeout(()=>{
     if(held){ segTimer=setTimeout(()=>playSeg(segI), 1500); return; }
     if(pinned) return stopHere();
@@ -963,7 +967,7 @@ function playSeg(i){
   }, dur);
 }
 function stopHere(){
-  clearTimeout(segTimer); autoOn=false;
+  clearTimeout(segTimer); stopAutoScroll(); autoOn=false;
   $("#tt").classList.remove("spinning");
   syncAutoBtn(); markTracks();
   $("#count").textContent=`Part ${segI+1} of ${segs.length}`;
@@ -997,6 +1001,48 @@ function renderTracks(){
 function markTracks(){
   tracks.querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-current", String(i===segI)));
 }
+/* the Details part plays its tabs in turn, then the side is over */
+function playTabs(el, tabsEl, firstReveal){
+  const btns=[...tabsEl.querySelectorAll('[role="tab"]')];
+  const panel=el.querySelector(".panel");
+  const extra=btns.length>1 ? 3000 : 0;      // multi-tab details get a little longer
+  const dwell=r=>Math.min(23000, Math.max(17000, r+9500))+extra;
+  let k=0;
+  segBar(dwell(firstReveal)*btns.length);
+  if(panel){ panel.scrollTop=0; autoScrollIn(panel, dwell(firstReveal)); }
+  const next=()=>{
+    if(held){ segTimer=setTimeout(next, 1500); return; }
+    k++;
+    if(k>=btns.length){
+      if(pinned) return stopHere();
+      if(segI+1<segs.length) return playSeg(segI+1);
+      return endOfSide();
+    }
+    if(notes.__showTab) notes.__showTab(btns[k].dataset.k);
+    if(panel) panel.scrollTop=0;
+    const r=panel?animateSegment(panel):0;
+    const d=dwell(r);
+    autoScrollIn(panel, d);
+    segTimer=setTimeout(next, d);
+  };
+  segTimer=setTimeout(next, dwell(firstReveal));
+}
+let scrollRaf=null;
+function autoScrollIn(el, ms){
+  cancelAnimationFrame(scrollRaf);
+  if(!el || reduced.matches) return;
+  const max=el.scrollHeight-el.clientHeight;
+  if(max<=6) return;
+  const start=performance.now(), delay=ms*0.10, span=Math.max(2400, ms*0.86);
+  const step=t=>{
+    if(!autoOn) return;
+    const p=Math.min(1, Math.max(0,(t-start-delay)/span));
+    el.scrollTop=max*p;
+    if(p<1) scrollRaf=requestAnimationFrame(step);
+  };
+  scrollRaf=requestAnimationFrame(step);
+}
+function stopAutoScroll(){ cancelAnimationFrame(scrollRaf); }
 function holdSegment(on){
   held=on;
   if(on){ clearTimeout(segTimer); bar.style.transition="none"; }
@@ -1028,16 +1074,19 @@ function updateBar(){
   bar.style.width=(max<=0?100:Math.min(100,(notes.scrollTop/max)*100))+"%";
 }
 function endOfSide(){
-  clearTimeout(segTimer); autoOn=false; ended=true;
+  clearTimeout(segTimer); stopAutoScroll(); autoOn=false; ended=true;
   $("#tt").classList.remove("spinning");
   segI=segs.length-1; showSeg(segI);            // stay on the last part
   bar.style.transition="width .3s linear"; bar.style.width="100%";
   syncAutoBtn();
   $("#count").textContent=`Part ${segs.length} of ${segs.length} · side ended`;
 }
-function takeOver(){ if(autoOn) setAuto(false); }
+function takeOver(){ stopAutoScroll(); if(autoOn) setAuto(false); }
 ["wheel","touchstart","pointerdown","keydown"].forEach(ev=>notes.addEventListener(ev,e=>{
-  if(e.target && e.target.closest && e.target.closest('[role="tab"], .tabs, .panel, .video, .clips')) return;
+  if(e.target && e.target.closest && e.target.closest('[role="tab"], .tabs, .panel, .video, .clips')){
+    stopAutoScroll();          // you scrolled it yourself: stop driving it, keep playing
+    return;
+  }
   takeOver();
 },{passive:true}));
 notes.addEventListener("scroll",updateBar,{passive:true});
@@ -1086,6 +1135,20 @@ function select(i, fromUser){
   if(fromUser && innerWidth<1000) $("#deck").scrollIntoView({behavior:reduced.matches?"auto":"smooth"});
 }
 
+function clearPlatter(){
+  const tt=$("#tt");
+  tt.dataset.empty="true"; tt.classList.remove("spinning","disc-landed");
+  $("#labelText").textContent=""; $("#labelSide").textContent="";
+  $("#labelDisc").setAttribute("fill","var(--cobalt)");
+  $("#deck").style.removeProperty("--accent-play");
+  document.documentElement.style.removeProperty("--album");
+  tracks.innerHTML=""; bar.style.transition="none"; bar.style.width="0%";
+  current=null; segs=[]; segI=0; ended=false; pinned=false;
+  if(!tt.querySelector(".drop-hint")){
+    const h=document.createElement("div"); h.className="drop-hint"; h.textContent="Drop a record here"; tt.appendChild(h);
+  }
+  crate.querySelectorAll(".sleeve").forEach(sl=>sl.setAttribute("aria-selected","false"));
+}
 function showEmpty(){
   notes.innerHTML=`<div class="empty"><div><b>Nothing on the platter</b><p>Drag a record from the crate onto the turntable, or click a sleeve. Each side plays itself, and scrolling takes over whenever you want.</p></div></div>`;
   const h=document.createElement("div"); h.className="drop-hint"; h.textContent="Drop a record here";
@@ -1098,8 +1161,9 @@ function needleDrop(){
 }
 
 $("#backBtn").addEventListener("click",()=>{
-  setAuto(false); pinned=false; ended=false;
+  setAuto(false);
   document.body.classList.remove("playing","tinted");
+  clearPlatter(); notes.classList.remove("segmented");
   setLayout(true); $("#backBtn").hidden=true; autoBtn.hidden=true;
   $("#count").textContent=`${PROJECTS.length} records`;
   crate.scrollLeft=0;
