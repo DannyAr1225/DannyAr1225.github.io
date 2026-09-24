@@ -747,7 +747,7 @@ function renderNotes(p){
   });
   // play a video and the side parks on this part until you move on
   n.querySelectorAll(".videoblock, .video").forEach(v=>{
-    v.addEventListener("pointerdown",()=>{ if(autoOn) stopHere(); });
+    v.addEventListener("pointerdown",()=>{ const f=v.querySelector("iframe"); if(f) f.dataset.played="1"; if(autoOn) stopHere(); });
   });
   n.querySelectorAll(".video video").forEach(v=>{
     v.addEventListener("play",()=>{ if(autoOn) stopHere(); });
@@ -949,6 +949,10 @@ function showSeg(i){
   segs.forEach((e,k)=>e.classList.toggle("on", k===segI));
   markTracks();
   notes.querySelectorAll(".seg video").forEach(v=>{ if(!v.closest(".seg").classList.contains("on")) v.pause(); });
+  // an embed keeps playing audio when hidden, so reload the ones we left behind
+  notes.querySelectorAll(".seg:not(.on) iframe").forEach(f=>{
+    if(f.dataset.played==="1"){ f.dataset.played=""; const src=f.src; f.src=src; }
+  });
 }
 function segBar(dur){
   const n=segs.length||1;
@@ -1165,7 +1169,7 @@ function needleDrop(){
 
 addEventListener("blur",()=>{
   const el=document.activeElement;
-  if(autoOn && el && el.tagName==="IFRAME" && el.closest("#notes")) stopHere();
+  if(el && el.tagName==="IFRAME" && el.closest("#notes")){ el.dataset.played="1"; if(autoOn) stopHere(); }
 });
 $("#backBtn").addEventListener("click",()=>{
   setAuto(false);
